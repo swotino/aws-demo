@@ -4,9 +4,9 @@ const aws = require('aws-sdk');
 const uuid = require('uuid');
 
 
-const ACCESS_KEY = process.env.ACCESS_KEY ? process.env.ACCESS_KEY : "AKIAZBWIGR4H6DT7EUQK";
-const SECRET_KEY = process.env.SECRET_KEY ? process.env.SECRET_KEY : "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";
-const REGION = process.env.REGION ? process.env.REGION : "eu-west-1";
+const ACCESS_KEY = process.env.ACCESS_KEY ? process.env.ACCESS_KEY : "<PERSONAL ACCESS KEY>";
+const SECRET_KEY = process.env.SECRET_KEY ? process.env.SECRET_KEY : "<PERSONAL SECRET KEY>";
+const REGION = process.env.REGION ? process.env.REGION : "<PERSONAL REGION>";
 
 const s3 = new aws.S3({ accessKeyId: ACCESS_KEY, secretAccessKey: SECRET_KEY, region: REGION });
 const dynamodb = new aws.DynamoDB({ accessKeyId: ACCESS_KEY, secretAccessKey: SECRET_KEY, region: REGION });
