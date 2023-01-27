@@ -10,9 +10,6 @@ yum install -y nodejs
 // Install Git
 yum install -y git
 
-// Create a dedicated directory for the application
-mkdir -p /var/app
-
 // Get the app from GitHub
 git clone https://github.com/swotino/aws-demo.git
 
