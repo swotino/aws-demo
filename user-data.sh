@@ -19,6 +19,9 @@ git clone https://github.com/swotino/aws-demo.git
 // Enter the app directory
 cd aws-demo
 
+// Create .env file
+echo "REGION=eu-west-1" > .env
+
 // Install the app dependencies
 npm install
 
