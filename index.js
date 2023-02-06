@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const aws = require('aws-sdk');
 const uuid = require('uuid');
+const axios = require('axios');
 
 const isEC2 = false;
 const ACCESS_KEY = process.env.ACCESS_KEY ? process.env.ACCESS_KEY : "<PERSONAL ACCESS KEY>";
@@ -12,6 +13,16 @@ const REGION = process.env.REGION ? process.env.REGION : "<PERSONAL REGION>";
 aws.config.update('eu-west-1');
 const s3 = isEC2 ? new aws.S3() : new aws.S3({ accessKeyId: ACCESS_KEY, secretAccessKey: SECRET_KEY, region: REGION });
 const dynamodb = isEC2 ? new aws.DynamoDB() : new aws.DynamoDB({ accessKeyId: ACCESS_KEY, secretAccessKey: SECRET_KEY, region: REGION });
+
+async function info() {
+  try {
+    const result = await axios.get('http://169.254.169.254/latest/meta-data/instance-id')
+    return { ec2: true, instance: result.data };
+  } catch(error) {
+    console.log(error);
+    return { ec2: false }
+  }
+}
 
 async function connectedToS3() {
   try {
@@ -50,6 +61,11 @@ app.get('/api/v1/s3connected', async (req, res) => {
 app.get('/api/v1/dynamoconnected', async (req, res) => {
   const connected = await connectedToDynamo();
   res.send({ connected });
+});
+
+app.get('/api/v1/info', async (req, res) => {
+  const data = await info();
+  res.send(data);
 });
 
 app.get('/api/v1/players', (req, res) => {
