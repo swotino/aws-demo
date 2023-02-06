@@ -10,7 +10,7 @@ const ACCESS_KEY = process.env.ACCESS_KEY ? process.env.ACCESS_KEY : "<PERSONAL 
 const SECRET_KEY = process.env.SECRET_KEY ? process.env.SECRET_KEY : "<PERSONAL SECRET KEY>";
 const REGION = process.env.REGION ? process.env.REGION : "eu-west-1";
 
-aws.config.update(REGION);
+aws.config.update({ region: REGION });
 const s3 = isEC2 ? new aws.S3() : new aws.S3({ accessKeyId: ACCESS_KEY, secretAccessKey: SECRET_KEY, region: REGION });
 const dynamodb = isEC2 ? new aws.DynamoDB() : new aws.DynamoDB({ accessKeyId: ACCESS_KEY, secretAccessKey: SECRET_KEY, region: REGION });
 
