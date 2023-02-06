@@ -17,6 +17,7 @@ git clone https://github.com/swotino/aws-demo.git
 cd aws-demo
 
 // Create .env file
+touch .env
 echo "REGION=eu-west-1" > .env
 
 // Install the app dependencies
