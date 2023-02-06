@@ -10,9 +10,6 @@ yum install -y nodejs
 // Install Git
 yum install -y git
 
-// User dir
-cd ~/
-
 // Get the app from GitHub
 git clone https://github.com/swotino/aws-demo.git
 
