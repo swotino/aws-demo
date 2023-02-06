@@ -5,10 +5,10 @@ const aws = require('aws-sdk');
 const uuid = require('uuid');
 const axios = require('axios');
 
-const isEC2 = false;
+const isEC2 = true;
 const ACCESS_KEY = process.env.ACCESS_KEY ? process.env.ACCESS_KEY : "<PERSONAL ACCESS KEY>";
 const SECRET_KEY = process.env.SECRET_KEY ? process.env.SECRET_KEY : "<PERSONAL SECRET KEY>";
-const REGION = process.env.REGION ? process.env.REGION : "<PERSONAL REGION>";
+const REGION = process.env.REGION ? process.env.REGION : "eu-west-1";
 
 aws.config.update(REGION);
 const s3 = isEC2 ? new aws.S3() : new aws.S3({ accessKeyId: ACCESS_KEY, secretAccessKey: SECRET_KEY, region: REGION });
