@@ -131,12 +131,10 @@
               .catch(error => console.error('Error:', error))
               .then(data => data.json())
               .then(data => {
-                if(data.data) {
-                  if(data.ec2){
+                if(data.ec2){
                     document.getElementById('badge-ec2').innerHTML = '<span class="badge text-bg-success">' + data.instance + '</span>';
-                  } else {
+                } else {
                     document.getElementById('badge-ec2').innerHTML = '<span class="badge text-bg-danger">No EC2</span>';
-                  }
                 }
             });
         }
