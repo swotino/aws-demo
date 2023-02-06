@@ -1,15 +1,17 @@
+require('dotenv').config;
 const express = require('express');
 const path = require('path');
 const aws = require('aws-sdk');
 const uuid = require('uuid');
 
-
+const isEC2 = false;
 const ACCESS_KEY = process.env.ACCESS_KEY ? process.env.ACCESS_KEY : "<PERSONAL ACCESS KEY>";
 const SECRET_KEY = process.env.SECRET_KEY ? process.env.SECRET_KEY : "<PERSONAL SECRET KEY>";
 const REGION = process.env.REGION ? process.env.REGION : "<PERSONAL REGION>";
 
-const s3 = new aws.S3({ accessKeyId: ACCESS_KEY, secretAccessKey: SECRET_KEY, region: REGION });
-const dynamodb = new aws.DynamoDB({ accessKeyId: ACCESS_KEY, secretAccessKey: SECRET_KEY, region: REGION });
+aws.config.update('eu-west-1');
+const s3 = isEC2 ? new aws.S3() : new aws.S3({ accessKeyId: ACCESS_KEY, secretAccessKey: SECRET_KEY, region: REGION });
+const dynamodb = isEC2 ? new aws.DynamoDB() : new aws.DynamoDB({ accessKeyId: ACCESS_KEY, secretAccessKey: SECRET_KEY, region: REGION });
 
 async function connectedToS3() {
   try {
