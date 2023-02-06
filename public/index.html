@@ -20,6 +20,9 @@
             <span id="badge-dynamo">
                 <span class="badge text-bg-danger">Dynamo Not Conneted</span>
             </span>
+            <span id="badge-ec2">
+                <span class="badge text-bg-danger">Not EC2</span>
+            </span>
         </div>
 
         <div class="card card-body">
@@ -121,9 +124,26 @@
                 });
             }
         }
+      
+        function ec2Info() {
+
+            fetch('/api/v1/info')
+              .catch(error => console.error('Error:', error))
+              .then(data => data.json())
+              .then(data => {
+                if(data.data) {
+                  if(data.ec2){
+                    document.getElementById('badge-ec2').innerHTML = '<span class="badge text-bg-success">' + data.instance + '</span>';
+                  } else {
+                    document.getElementById('badge-ec2').innerHTML = '<span class="badge text-bg-danger">No EC2</span>';
+                  }
+                }
+            });
+        }
 
         s3connected();
         dynamoconnected();
+        ec2Info();
         dynamoData();
 
     </script>
