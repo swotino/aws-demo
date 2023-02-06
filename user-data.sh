@@ -4,7 +4,7 @@
 yum update -y
 
 // Install Nodejs
-curl -sL https://rpm.nodesource.com/setup_15.x | bash -
+curl -sL https://rpm.nodesource.com/setup_16.x | bash -
 yum install -y nodejs
 
 // Install Git
